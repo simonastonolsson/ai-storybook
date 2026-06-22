@@ -41,9 +41,8 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg text-ink/70">
-          AI Storybook helps you write and illustrate personalized children&apos;s
-          books in minutes. Just bring the imagination — we&apos;ll handle the
-          pages.
+          Story Nest helps you write and illustrate personalized books in
+          minutes.
         </p>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
