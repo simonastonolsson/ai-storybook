@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const features = [
   {
     title: "Describe your idea",
@@ -45,21 +43,40 @@ export default function Home() {
           minutes.
         </p>
 
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <Link
-            href="/create"
-            className="rounded-full bg-ink px-8 py-3.5 text-base font-semibold text-cream shadow-lg transition hover:scale-[1.02] hover:bg-purple-700"
-          >
-            Create your first story
-          </Link>
-          <a
-            href="https://nextjs.org/docs"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full border border-ink/15 bg-white/60 px-8 py-3.5 text-base font-semibold text-ink backdrop-blur transition hover:bg-white"
-          >
-            Read the docs
-          </a>
+        <div className="mt-12 w-full max-w-2xl">
+          <div className="relative rounded-[2rem] border-4 border-dashed border-purple-300/70 bg-white/80 p-6 shadow-xl backdrop-blur sm:p-8">
+            <div className="pointer-events-none absolute -top-5 -left-3 text-4xl">
+              🌟
+            </div>
+            <div className="pointer-events-none absolute -top-5 -right-3 text-4xl">
+              🦊
+            </div>
+
+            <label
+              htmlFor="memory"
+              className="mb-3 block text-left text-lg font-bold text-purple-700"
+            >
+              Berätta om ett minne ✨
+            </label>
+
+            <textarea
+              id="memory"
+              name="memory"
+              rows={5}
+              placeholder="Till exempel: Den dagen vi byggde en koja i skogen och hittade en liten igelkott..."
+              className="w-full resize-none rounded-2xl border-2 border-purple-200 bg-cream/60 p-4 text-base text-ink shadow-inner outline-none transition placeholder:text-ink/40 focus:border-purple-400 focus:ring-4 focus:ring-purple-200"
+            />
+
+            <button
+              type="button"
+              className="group mt-5 flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 px-8 py-5 text-xl font-extrabold text-white shadow-lg shadow-purple-300/50 transition hover:scale-[1.03] hover:shadow-xl hover:shadow-pink-300/50 active:scale-100"
+            >
+              <span className="text-2xl transition group-hover:rotate-12">
+                🪄
+              </span>
+              Skapa min magiska saga
+            </button>
+          </div>
         </div>
 
         <div className="mt-20 grid w-full gap-6 sm:grid-cols-3">
