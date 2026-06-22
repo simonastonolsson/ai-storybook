@@ -30,12 +30,8 @@ export default function Home() {
           Powered by AI · Made for bedtime
         </span>
 
-        <h1 className="text-balance text-5xl font-bold tracking-tight sm:text-6xl">
-          Turn any idea into a
-          <span className="bg-gradient-to-r from-purple-600 to-amber-500 bg-clip-text text-transparent">
-            {" "}
-            magical storybook
-          </span>
+        <h1 className="text-balance text-5xl font-extrabold tracking-tight text-purple-600 drop-shadow-sm sm:text-6xl">
+          My Magical Storybook
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg text-ink/70">
@@ -56,14 +52,14 @@ export default function Home() {
               htmlFor="memory"
               className="mb-3 block text-left text-lg font-bold text-purple-700"
             >
-              Berätta om ett minne ✨
+              Tell us your story ✨
             </label>
 
             <textarea
               id="memory"
               name="memory"
               rows={5}
-              placeholder="Till exempel: Den dagen vi byggde en koja i skogen och hittade en liten igelkott..."
+              placeholder="Describe a memory or an idea..."
               className="w-full resize-none rounded-2xl border-2 border-purple-200 bg-cream/60 p-4 text-base text-ink shadow-inner outline-none transition placeholder:text-ink/40 focus:border-purple-400 focus:ring-4 focus:ring-purple-200"
             />
 
@@ -74,7 +70,7 @@ export default function Home() {
               <span className="text-2xl transition group-hover:rotate-12">
                 🪄
               </span>
-              Skapa min magiska saga
+              Create my magical story
             </button>
           </div>
         </div>
