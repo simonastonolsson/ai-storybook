@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Storybook",
+  title: "Story Nest",
   description: "Create magical, AI-generated storybooks in seconds.",
 };
 

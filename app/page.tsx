@@ -77,7 +77,7 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-ink/10 py-8 text-center text-sm text-ink/50">
-        Built with Next.js · ai-storybook
+        Built with Next.js · Story Nest
       </footer>
     </main>
   );
