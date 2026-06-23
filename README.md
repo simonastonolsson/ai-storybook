@@ -1,6 +1,6 @@
-# ai-storybook
+# Story Nest
 
-A [Next.js](https://nextjs.org) starter for creating AI-generated children's storybooks, built with the App Router, TypeScript and Tailwind CSS.
+A [Next.js](https://nextjs.org) starter for creating AI-generated storybooks, built with the App Router, TypeScript and Tailwind CSS. The npm package name remains `ai-storybook`.
 
 ## Getting started
 
