@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const features = [
   {
     title: "Describe your idea",
@@ -20,6 +24,47 @@ const features = [
 ];
 
 export default function Home() {
+  const [idea, setIdea] = useState("");
+  const [story, setStory] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleCreateStory() {
+    const trimmed = idea.trim();
+    if (!trimmed || isLoading) return;
+
+    setIsLoading(true);
+    setError("");
+    setStory("");
+
+    try {
+      const response = await fetch("/api/story", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idea: trimmed }),
+      });
+
+      const data = (await response.json()) as {
+        story?: string;
+        error?: string;
+      };
+
+      if (!response.ok) {
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      }
+
+      setStory(data.story ?? "");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-purple-300/40 blur-3xl" />
@@ -59,20 +104,52 @@ export default function Home() {
               id="memory"
               name="memory"
               rows={5}
+              value={idea}
+              onChange={(event) => setIdea(event.target.value)}
+              disabled={isLoading}
               placeholder="Describe a memory or an idea..."
-              className="w-full resize-none rounded-2xl border-2 border-purple-200 bg-cream/60 p-4 text-base text-ink shadow-inner outline-none transition placeholder:text-ink/40 focus:border-purple-400 focus:ring-4 focus:ring-purple-200"
+              className="w-full resize-none rounded-2xl border-2 border-purple-200 bg-cream/60 p-4 text-base text-ink shadow-inner outline-none transition placeholder:text-ink/40 focus:border-purple-400 focus:ring-4 focus:ring-purple-200 disabled:opacity-60"
             />
 
             <button
               type="button"
-              className="group mt-5 flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 px-8 py-5 text-xl font-extrabold text-white shadow-lg shadow-purple-300/50 transition hover:scale-[1.03] hover:shadow-xl hover:shadow-pink-300/50 active:scale-100"
+              onClick={handleCreateStory}
+              disabled={isLoading || !idea.trim()}
+              className="group mt-5 flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 px-8 py-5 text-xl font-extrabold text-white shadow-lg shadow-purple-300/50 transition hover:scale-[1.03] hover:shadow-xl hover:shadow-pink-300/50 active:scale-100 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
             >
-              <span className="text-2xl transition group-hover:rotate-12">
-                🪄
-              </span>
-              Create my magical story
+              {isLoading ? (
+                <>
+                  <span className="text-2xl">⏳</span>
+                  Writing your story...
+                </>
+              ) : (
+                <>
+                  <span className="text-2xl transition group-hover:rotate-12">
+                    🪄
+                  </span>
+                  Create my magical story
+                </>
+              )}
             </button>
+
+            {error && (
+              <p className="mt-4 rounded-2xl border-2 border-red-200 bg-red-50 p-4 text-left text-sm font-medium text-red-600">
+                {error}
+              </p>
+            )}
           </div>
+
+          {story && (
+            <div className="mt-8 rounded-[2rem] border-4 border-amber-200 bg-gradient-to-br from-cream to-amber-50/60 p-6 text-left shadow-xl sm:p-8">
+              <div className="mb-4 flex items-center gap-2 text-lg font-bold text-amber-600">
+                <span className="text-2xl">📖</span>
+                Your magical story
+              </div>
+              <div className="whitespace-pre-wrap text-base leading-relaxed text-ink/90">
+                {story}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="mt-20 grid w-full gap-6 sm:grid-cols-3">
