@@ -13,14 +13,12 @@ export default function Page() {
       return;
     }
     setIsLoading(true);
-    setStory(''); // Clear previous story
+    setStory('');
 
     try {
       const response = await fetch('/api/story', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: memory }),
       });
 
@@ -40,9 +38,9 @@ export default function Page() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-8">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 text-center">
       {/* Main Headline Section */}
-      <div className="text-center">
+      <div className="mb-12">
         <h1 className="text-5xl font-bold">
           Turn any idea into a <span className="text-purple-500">magical storybook</span>
         </h1>
@@ -52,7 +50,7 @@ export default function Page() {
       </div>
 
       {/* New Story Creation Section */}
-      <div className="mt-12 w-full max-w-2xl">
+      <div className="w-full max-w-2xl">
         <div className="relative rounded-[2rem] border-4 border-dashed border-purple-300/70 bg-white/80 p-6 shadow-xl backdrop-blur">
           <div className="pointer-events-none absolute -top-5 -left-3 text-4xl">🌟</div>
           <textarea
@@ -72,22 +70,33 @@ export default function Page() {
           disabled={isLoading}
           className="group mt-5 flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 px-8 py-4 text-xl font-bold text-white transition-transform duration-300 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isLoading ? (
-            'Creating magic...'
-          ) : (
-            <>
-              <span className="transition group-hover:rotate-12">🪄</span>
-              Create my magical story
-            </>
-          )}
+          {isLoading ? 'Creating magic...' : ( <> <span className="transition group-hover:rotate-12">🪄</span> Create my magical story </> )}
         </button>
       </div>
-      
+
       {/* Story Result Section */}
       {story && (
-        <div className="mt-12 w-full max-w-2xl rounded-xl bg-white/80 p-8 shadow-lg">
+        <div className="mt-12 w-full max-w-2xl rounded-xl bg-white/80 p-8 shadow-lg text-left">
           <h2 className="text-2xl font-bold text-gray-800">Your Magical Story:</h2>
           <p className="mt-4 whitespace-pre-wrap text-lg text-gray-700">{story}</p>
+        </div>
+      )}
+
+       {/* Feature Highlight Section */}
+      {!story && (
+        <div className="mt-20 grid grid-cols-1 gap-8 text-center md:grid-cols-3">
+            <div className="rounded-lg bg-white/50 p-6 shadow-md">
+                <h3 className="text-xl font-semibold">Describe your idea</h3>
+                <p className="mt-2 text-gray-600">Pick a hero, a setting and a lesson.</p>
+            </div>
+            <div className="rounded-lg bg-white/50 p-6 shadow-md">
+                <h3 className="text-xl font-semibold">AI writes the story</h3>
+                <p className="mt-2 text-gray-600">Age-appropriate chapters are generated.</p>
+            </div>
+            <div className="rounded-lg bg-white/50 p-6 shadow-md">
+                <h3 className="text-xl font-semibold">Illustrate every page</h3>
+                <p className="mt-2 text-gray-600">Each scene gets matching artwork.</p>
+            </div>
         </div>
       )}
     </main>
