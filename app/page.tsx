@@ -12,7 +12,6 @@ export default function Page() {
               name="memory"
               rows={5}
               placeholder="Till exempel: Den dagen vi byggde en koja i skogen..."
-              ...
             />
 
             <button
